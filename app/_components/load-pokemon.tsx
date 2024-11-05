@@ -4,6 +4,10 @@ import { useState } from 'react'
 import { ClipLoader } from 'react-spinners'
 import PokemonCard, { type Pokemon } from './pokemon-cards'
 
+/**
+ * This component is responsible for loading more pokemon
+ * when the user clicks the "Load More" button.
+ */
 const LoadPokemon = ({
   search,
   initialPokemon,
@@ -19,16 +23,23 @@ const LoadPokemon = ({
     setLoading(true)
     await new Promise(resolve => setTimeout(resolve, 1000))
     const nextPage = page + 1
+
+    // fetch the next page of pokemon in the client
     const newPokemon = await fetchPokemon({
       search,
       page: nextPage,
     })
+
+    // set the new pokemon and page
     setPage(nextPage)
+
     setPokemon(prev => {
       if (!prev) return newPokemon
+      // Remove duplicates
       const uniquePokemon = newPokemon.filter(
         (poke: Pokemon) => !prev.some(p => p.name === poke.name),
       )
+      // Merge the new pokemon with the existing pokemon
       return [...prev, ...uniquePokemon]
     })
     setLoading(false)

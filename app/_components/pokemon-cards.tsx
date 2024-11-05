@@ -24,7 +24,7 @@ type PokemonData = {
 type Props = {
   pokemon: Pokemon
 }
-const PokemonCard: React.FC<Props> = ({ pokemon }) => {
+const PokemonCard = ({ pokemon }: Props) => {
   const [data, setData] = useState<PokemonData | null>(null)
   const [isFlipped, setIsFlipped] = useState(false)
   const controls = useAnimation()
@@ -111,8 +111,10 @@ const PokemonCard: React.FC<Props> = ({ pokemon }) => {
                 </p>
                 <div className="flex flex-col text-center">
                   <h3 className="font-bold text-xl underline">Abilities</h3>
-                  {data?.abilities?.map((ability, index) => (
-                    <span key={index}>{ability.ability.name}</span>
+                  {data?.abilities?.map(ability => (
+                    <span key={ability.ability.name}>
+                      {ability.ability.name}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -125,10 +127,10 @@ const PokemonCard: React.FC<Props> = ({ pokemon }) => {
         {pokemon.name}
       </span>
       <div className="flex gap-5">
-        {data?.types?.map((type, index) => (
+        {data?.types?.map(type => (
           <PokemonType
-            key={index}
-            typeName={
+            key={type.type.name}
+            type={
               type.type.name as
                 | 'fire'
                 | 'grass'
