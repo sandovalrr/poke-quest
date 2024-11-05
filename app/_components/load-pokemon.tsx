@@ -13,7 +13,7 @@ const LoadPokemon = ({
 }) => {
   const [pokemon, setPokemon] = useState(initialPokemon)
   const [page, setPage] = useState(1)
-  const [_loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -44,12 +44,12 @@ const LoadPokemon = ({
         ))}
       </div>
       <div className="flex flex-col justify-center items-center p-4 gap-4">
-        {_loading && <ClipLoader color="#fff" />}
+        {loading && <ClipLoader color="#fff" />}
 
         <button
           type="button"
           onClick={loadMorePokemon}
-          disabled={_loading}
+          disabled={loading}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Load More

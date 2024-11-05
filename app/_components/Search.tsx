@@ -11,6 +11,7 @@ const Search = ({ search }: { search?: string }) => {
 
   const [query] = useDebounce(text, 750)
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false
@@ -23,6 +24,7 @@ const Search = ({ search }: { search?: string }) => {
       router.push(`?search=${query}`)
     }
   }, [query])
+
   return (
     <div className="flex justify-center w-[90%] mx-auto max-w-[1500px]">
       <input
