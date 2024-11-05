@@ -1,6 +1,6 @@
-import Search from '@/app/_components/Search'
 import LoadPokemon from '@/app/_components/load-pokemon'
-import { fetchPokemon } from './actions/getPokemon'
+import Search from '@/app/_components/search'
+import { fetchPokemon } from './actions/get-pokemons'
 const Page = async ({
   searchParams,
 }: {

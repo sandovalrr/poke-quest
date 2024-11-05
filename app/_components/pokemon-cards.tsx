@@ -1,7 +1,7 @@
 import { motion, useAnimation } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import Type from './Type'
+import PokemonType from './pokemon-type'
 
 export type Pokemon = {
   url: string
@@ -126,7 +126,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon }) => {
       </span>
       <div className="flex gap-5">
         {data?.types?.map((type, index) => (
-          <Type
+          <PokemonType
             key={index}
             typeName={
               type.type.name as

@@ -5,19 +5,19 @@ const typeColors = {
   electric: 'bg-yellow-500',
   poison: 'bg-purple-500',
   flying: 'bg-orange-400',
+} as const
+
+type Props = {
+  type: keyof typeof typeColors
 }
 
-interface TypeProps {
-  typeName: keyof typeof typeColors
-}
-
-const Type: React.FC<TypeProps> = ({ typeName }) => {
-  const bgColor = typeColors[typeName] || 'bg-gray-500'
+const PokemonType = ({ type }: Props) => {
+  const bgColor = typeColors[type] || 'bg-gray-500'
   return (
     <div className={`inline-block px-3 text-white rounded-md ${bgColor}`}>
-      {typeName}
+      {type}
     </div>
   )
 }
 
-export default Type
+export default PokemonType

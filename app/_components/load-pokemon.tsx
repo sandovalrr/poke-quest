@@ -1,8 +1,8 @@
 'use client'
-import { fetchPokemon } from '@/app/actions/getPokemon'
+import { fetchPokemon } from '@/app/actions/get-pokemons'
 import { useState } from 'react'
 import { ClipLoader } from 'react-spinners'
-import PokemonCard, { type Pokemon } from './PokemonCard'
+import PokemonCard, { type Pokemon } from './pokemon-cards'
 
 const LoadPokemon = ({
   search,
@@ -15,11 +15,9 @@ const LoadPokemon = ({
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
 
-  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
-
   const loadMorePokemon = async () => {
     setLoading(true)
-    await delay(1000)
+    await new Promise(resolve => setTimeout(resolve, 1000))
     const nextPage = page + 1
     const newPokemon = await fetchPokemon({
       search,

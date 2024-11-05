@@ -2,14 +2,11 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { useDebounce } from 'use-debounce'
 
 const Search = ({ search }: { search?: string }) => {
   const router = useRouter()
   const initialRender = useRef(true)
   const [text, setText] = useState(search)
-
-  const [query] = useDebounce(text, 750)
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -18,12 +15,12 @@ const Search = ({ search }: { search?: string }) => {
       return
     }
 
-    if (!query) {
+    if (!text) {
       router.push('/')
     } else {
-      router.push(`?search=${query}`)
+      router.push(`?search=${text}`)
     }
-  }, [query])
+  }, [text])
 
   return (
     <div className="flex justify-center w-[90%] mx-auto max-w-[1500px]">

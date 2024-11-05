@@ -1,5 +1,7 @@
 'use server'
 
+const PAGE_SIZE = 24
+
 export async function getPokemon({
   query,
   page = 1,
@@ -9,7 +11,7 @@ export async function getPokemon({
   page?: number
   limit?: number
 }) {
-  const apiUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${(page - 1) * 24}`
+  const apiUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${(page - 1) * PAGE_SIZE}`
 
   try {
     const response = await fetch(apiUrl)
@@ -20,9 +22,9 @@ export async function getPokemon({
         pokemonNameStartsWithQuery(pokemon.name, query.toLowerCase()),
       )
 
-      return filteredPokemon.slice(0, 24)
+      return filteredPokemon.slice(0, PAGE_SIZE)
     }
-    return data.results.slice(0, 24)
+    return data.results.slice(0, PAGE_SIZE)
   } catch (error) {
     console.log(error)
     return null
