@@ -1,33 +1,34 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useRef } from 'react'
 
-const Search = ({ search }: { search?: string }) => {
+const Search = () => {
   const router = useRouter()
-  const initialRender = useRef(true)
-  const [text, setText] = useState(search)
+  const searchParams = useSearchParams()
+  const timeoutRef = useRef<number>()
 
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false
-      return
-    }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const text = e.target.value
 
-    if (!text) {
-      router.push('/')
-    } else {
-      router.push(`?search=${text}`)
-    }
-  }, [text, router])
+    window.clearTimeout(timeoutRef.current)
+
+    timeoutRef.current = window.setTimeout(() => {
+      if (!text) {
+        router.push('/')
+      } else {
+        router.push(`?search=${text}`)
+      }
+    }, 500)
+  }
 
   return (
     <div className="flex justify-center w-[90%] mx-auto max-w-[1500px]">
       <input
         type="text"
-        value={text}
+        defaultValue={searchParams.get('search') ?? ''}
         placeholder="Search Pokemon..."
-        onChange={e => setText(e.target.value)}
+        onChange={handleInputChange}
         className="block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-yellow-500 sm:text-sm sm:leading-6 mb-10"
       />
     </div>

@@ -14,7 +14,7 @@ const Page = async ({
   const pokemon = await fetchPokemon({ search })
   return (
     <div className="max-w-[1500px] w-[95%] mx-auto">
-      <Search search={search} />
+      <Search />
       <ul key={Math.random()}>
         <LoadPokemon search={search} initialPokemon={pokemon} />
       </ul>

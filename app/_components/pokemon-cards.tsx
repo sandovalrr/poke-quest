@@ -24,6 +24,7 @@ type PokemonData = {
 type Props = {
   pokemon: Pokemon
 }
+
 const PokemonCard = ({ pokemon }: Props) => {
   const [data, setData] = useState<PokemonData | null>(null)
   const [isFlipped, setIsFlipped] = useState(false)

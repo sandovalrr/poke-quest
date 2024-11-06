@@ -17,7 +17,7 @@ export async function getPokemon({
 
     if (query) {
       const filteredPokemon = data.results.filter((pokemon: { name: string }) =>
-        pokemonNameStartsWithQuery(pokemon.name, query.toLowerCase()),
+        pokemon.name.toLowerCase().includes(query.toLowerCase()),
       )
 
       return filteredPokemon.slice(0, PAGE_SIZE)
@@ -27,10 +27,6 @@ export async function getPokemon({
     console.log(error)
     return null
   }
-}
-
-function pokemonNameStartsWithQuery(name: string, query: string) {
-  return name.toLowerCase().startsWith(query)
 }
 
 export async function fetchPokemon({
