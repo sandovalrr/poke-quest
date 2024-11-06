@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Pokedex',
-  description: 'Next.js 14 Pokedex with Infinite Scrolling',
+  description: 'Next.js 14 Pokedex',
 }
 
 export default function RootLayout({
