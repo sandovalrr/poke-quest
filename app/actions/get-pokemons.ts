@@ -1,5 +1,3 @@
-'use server'
-
 const PAGE_SIZE = 24
 
 export async function getPokemon({
