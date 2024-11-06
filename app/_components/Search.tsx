@@ -8,7 +8,6 @@ const Search = ({ search }: { search?: string }) => {
   const initialRender = useRef(true)
   const [text, setText] = useState(search)
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false
@@ -20,7 +19,7 @@ const Search = ({ search }: { search?: string }) => {
     } else {
       router.push(`?search=${text}`)
     }
-  }, [text])
+  }, [text, router])
 
   return (
     <div className="flex justify-center w-[90%] mx-auto max-w-[1500px]">
